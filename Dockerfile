@@ -21,8 +21,9 @@ RUN apk update && apk upgrade --available && \
     helm init --client-only
 
 ENV PYTHONPATH "/usr/lib/python3.10/site-packages/"
+ENV NODE_PATH "/usr/src/node_modules"
 
 COPY . /usr/src/
 WORKDIR /usr/src/
 RUN npm ci
-ENTRYPOINT ["NODE_PATH=/usr/src/node_modules", "node", "/usr/src/index.js"]
+ENTRYPOINT ["node", "/usr/src/index.js"]
