@@ -43,8 +43,8 @@ action will execute a `helm delete $service`
 
 #### Versions
 
-- `helm`: v2.16.1
-- `helm3`: v3.0.0
+- `helm`: v2.17.0
+- `helm3`: v3.12.0
 
 ### Environment
 
@@ -82,7 +82,7 @@ jobs:
           name: foobar
         value-files: >-
         [
-          "values.yaml", 
+          "values.yaml",
           "values.production.yaml"
         ]
       env:
@@ -104,26 +104,26 @@ resources to pick up the canary pods and route traffic to them.
 ```yaml
 # .github/workflows/deploy.yml
 name: Deploy
-on: ['deployment']
+on: ["deployment"]
 
 jobs:
   deployment:
-    runs-on: 'ubuntu-latest'
+    runs-on: "ubuntu-latest"
     steps:
-    - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
 
-    - name: 'Deploy'
-      uses: 'deliverybot/helm@v1'
-      with:
-        release: 'nginx'
-        track: canary
-        namespace: 'default'
-        chart: 'app'
-        token: '${{ github.token }}'
-        values: |
-          name: foobar
-      env:
-        KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
+      - name: "Deploy"
+        uses: "chrkaatz/helm@v1.9"
+        with:
+          release: "nginx"
+          track: canary
+          namespace: "default"
+          chart: "app"
+          token: "${{ github.token }}"
+          values: |
+            name: foobar
+        env:
+          KUBECONFIG_FILE: "${{ secrets.KUBECONFIG }}"
 ```
 
 ## Example pr cleanup
@@ -142,19 +142,19 @@ on:
 
 jobs:
   deployment:
-    runs-on: 'ubuntu-latest'
+    runs-on: "ubuntu-latest"
     steps:
-    - name: 'Deploy'
-      uses: 'deliverybot/helm@v1'
-      with:
-        # Task remove means to remove the helm release.
-        task: 'remove'
-        release: 'review-myapp-${{ github.event.pull_request.number }}'
-        version: '${{ github.sha }}'
-        track: 'stable'
-        chart: 'app'
-        namespace: 'example-helm'
-        token: '${{ github.token }}'
-      env:
-        KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
+      - name: "Deploy"
+        uses: "chrkaatz/helm@v1.9"
+        with:
+          # Task remove means to remove the helm release.
+          task: "remove"
+          release: "review-myapp-${{ github.event.pull_request.number }}"
+          version: "${{ github.sha }}"
+          track: "stable"
+          chart: "app"
+          namespace: "example-helm"
+          token: "${{ github.token }}"
+        env:
+          KUBECONFIG_FILE: "${{ secrets.KUBECONFIG }}"
 ```
