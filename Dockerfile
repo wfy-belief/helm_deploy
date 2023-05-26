@@ -23,5 +23,6 @@ RUN apk update && apk upgrade --available && \
 ENV PYTHONPATH "/usr/lib/python3.10/site-packages/"
 
 COPY . /usr/src/
+WORKDIR /usr/src/
 RUN cd /usr/src/ && npm ci
 ENTRYPOINT ["node", "/usr/src/index.js"]
