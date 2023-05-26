@@ -25,4 +25,4 @@ ENV PYTHONPATH "/usr/lib/python3.10/site-packages/"
 COPY . /usr/src/
 WORKDIR /usr/src/
 RUN npm ci
-ENTRYPOINT ["node", "/usr/src/index.js"]
+ENTRYPOINT ["NODE_PATH=/usr/src/node_modules", "node", "/usr/src/index.js"]
