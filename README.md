@@ -44,7 +44,7 @@ action will execute a `helm delete $service`
 #### Versions
 
 - `helm`: v2.17.0
-- `helm3`: v3.12.0
+- `helm3`: v3.16.4
 
 ### Environment
 

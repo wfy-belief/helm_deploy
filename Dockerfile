@@ -3,7 +3,7 @@ FROM node:lts-alpine3.17
 ENV BASE_URL="https://get.helm.sh"
 
 ENV HELM_2_FILE="helm-v2.17.0-linux-amd64.tar.gz"
-ENV HELM_3_FILE="helm-v3.12.0-linux-amd64.tar.gz"
+ENV HELM_3_FILE="helm-v3.16.4-linux-amd64.tar.gz"
 
 RUN apk update && apk upgrade --available && \
     apk add --no-cache  ca-certificates python3 jq curl bash aws-cli && \
